@@ -7,6 +7,16 @@
     "target_g3man_version" : 7,
     "depends" : [],
     "breaks" : [],
+    "imports": [
+        {
+            "name" : "forgery_9",
+            "contingency_type" : "suggest",
+            "contingency": {
+            "name" : "Nubby's Forgery",
+            "link" : "https://github.com/skirlez/nubbys-forgery/releases/tag/BETA-V9"
+            }
+        }
+    ],
 
     "patches" : [
         {

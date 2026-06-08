@@ -30,7 +30,7 @@
 	// These can be local paths if you start the string with \"path:\"
 	// or a link to a GitHub repository (with "github:user/repo/branch" or "github-tag:user/repo")
 	// For more information, see https://github.com/skirlez/frida/wiki/Dependency-Management
-	"dependencies": [],
+	"dependencies": ["github-tag:skirlez/nubbys-forgery"],
 	
 	// Evaluate dependencies of dependencies
 	// If this is disabled, you have to manually specify all the dependencies of your dependencies.
