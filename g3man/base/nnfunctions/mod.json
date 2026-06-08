@@ -1,0 +1,18 @@
+{
+    "mod_id" : "nnfunctions",
+    "display_name" : "NNFunctions",
+    "description" : "Library mod with useful functions for NNF mods. Also provides useful events.",
+    "credits" : ["seymour"],
+    "version" : "0.1.0",
+    "target_g3man_version" : 7,
+    "depends" : [],
+    "breaks" : [],
+
+    "patches" : [
+        {
+            "type" : "gmlp",
+            "path" : "patches"
+        }
+    ],
+    "datafile_path" : "mod_data.win"
+}
