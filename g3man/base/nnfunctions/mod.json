@@ -4,7 +4,7 @@
     "description" : "Library mod with useful functions for NNF mods. Also provides useful events.",
     "credits" : ["seymour"],
     "version" : "0.1.0",
-    "target_g3man_version" : 7,
+    "target_g3man_version" : 9,
     "depends" : [],
     "breaks" : [],
     "imports": [
@@ -13,7 +13,7 @@
             "contingency_type" : "suggest",
             "contingency": {
             "name" : "Nubby's Forgery",
-            "link" : "https://github.com/skirlez/nubbys-forgery/releases/tag/BETA-V9"
+            "link" : "https://github.com/skirlez/nubbys-forgery/releases/tag/10.0.1"
             }
         }
     ],
