@@ -130,10 +130,11 @@ function get_highest_peg(amount = 1) {
 }
 
 
-/// @function		get_lowest_peg([amount]);
+/// @function		get_lowest_peg([amount], [min_peg_number]);
 /// @param {Real}	amount	The number of pegs to get
+/// @param {Real}	min_peg_number	Anything below this number will not be returned.
 /// @description	Returns the requested amount of lowest # pegs, sorted
-function get_lowest_peg(amount = 1) {
+function get_lowest_peg(amount = 1, min_peg_number = 1) {
     var _ValidPegs = ds_list_create();
     ds_list_clear(_ValidPegs);
 
@@ -142,7 +143,9 @@ function get_lowest_peg(amount = 1) {
         
         if (instance_exists(_Tar) and _Tar != -1) {
             if (_Tar.PegDead == false) {
-				var _position_to_insert = 0
+				if (_Tar.PegNum < min_peg_number) continue;
+				
+				var _position_to_insert = 0;
 				while (_position_to_insert < ds_list_size(_ValidPegs)) {
 					if (_Tar.PegNum <= ds_list_find_value(_ValidPegs, _position_to_insert).PegNum) {
 						break;
@@ -208,6 +211,57 @@ function random_chance(random_num, rate) {
 	return random_num < rate;
 }
 
+
+function INTERNAL_give_perk(arg0, arg1 = 950, arg2 = 540)
+{
+    var new_perk = instance_create_layer(arg1, arg2, "UnderCursor", obj_PerkSelMove);
+    new_perk.HeldPerk = arg0;
+    var perk_stacked = 0;
+    var duped_id = -1;
+    
+    if (instance_exists(obj_ParPerk))
+    {
+        for (var i = 0; i < ds_list_size(obj_PerkMGMT.PerkInst); i += 1)
+        {
+            if (ds_list_find_value(obj_PerkMGMT.PerkInst, i).MyPerkID == new_perk.HeldPerk)
+            {
+                perk_stacked = true;
+                duped_id = ds_list_find_value(obj_PerkMGMT.PerkInst, i);
+                break;
+            }
+        }
+    }
+    
+    if (perk_stacked == false)
+    {
+        if (ds_list_size(obj_PerkMGMT.PerkDispList) < 8)
+        {
+            new_perk.TarX = obj_PerkMGMT.PerkX + (59 * ds_list_size(obj_PerkMGMT.PerkDispList));
+            new_perk.TarY = obj_PerkMGMT.PerkY;
+            new_perk.CountAsDispUp = true;
+        }
+        else
+        {
+            var _TtlSize = ds_list_size(obj_PerkMGMT.PerkDispList) + 1;
+            var _Spacing = round((obj_PerkMGMT.PerkEndSpace - obj_PerkMGMT.PerkX) / _TtlSize);
+            new_perk.TarY = obj_PerkMGMT.PerkY;
+            var _TarX = obj_PerkMGMT.PerkX + (_Spacing * _TtlSize);
+            new_perk.TarX = _TarX;
+            new_perk.CountAsDispUp = true;
+        }
+    }
+    else
+    {
+        new_perk.TarX = duped_id.x;
+        new_perk.TarY = duped_id.y;
+        new_perk.CountAsDispUp = false;
+    }
+    
+    new_perk.sprite_index = object_get_sprite(obj_PerkMGMT.PerkObj[arg0]);
+    new_perk.image_alpha = 1;
+}
+
+
 /// @function		give_perk(perk_id, [instant], [at_x], [at_y]);
 /// @param {Real}	perk_id	The ID of the desired perk
 /// @param {Bool}	instant	Whether or not the perk should appear in the list instantly
@@ -215,51 +269,16 @@ function random_chance(random_num, rate) {
 /// @param {Real}	at_y	The y coord to spawn it at (defaults to center)
 /// @description	Gives the player a given perk
 function give_perk(perk_id, instant = false, at_x = 950, at_y = 540) {
-    //var new_perk = instance_create_layer(at_x, at_y, "UnderCursor", obj_PerkSelMove);
-    //new_perk.HeldPerk = arg0;
-    //var perk_stacked = 0;
-    //var duped_id = -1;
-    
-    //if (instance_exists(obj_ParPerk))
-    //{
-    //    for (var i = 0; i < ds_list_size(obj_PerkMGMT.PerkInst); i += 1)
-    //    {
-    //        if (ds_list_find_value(obj_PerkMGMT.PerkInst, i).MyPerkID == new_perk.HeldPerk)
-    //        {
-    //            perk_stacked = true;
-    //            duped_id = ds_list_find_value(obj_PerkMGMT.PerkInst, i);
-    //            break;
-    //        }
-    //    }
-    //}
-    
-    //if (perk_stacked == false)
-    //{
-    //    if (ds_list_size(obj_PerkMGMT.PerkDispList) < 8)
-    //    {
-    //        new_perk.TarX = obj_PerkMGMT.PerkX + (59 * ds_list_size(obj_PerkMGMT.PerkDispList));
-    //        new_perk.TarY = obj_PerkMGMT.PerkY;
-    //        new_perk.CountAsDispUp = true;
-    //    }
-    //    else
-    //    {
-    //        var _TtlSize = ds_list_size(obj_PerkMGMT.PerkDispList) + 1;
-    //        var _Spacing = round((obj_PerkMGMT.PerkEndSpace - obj_PerkMGMT.PerkX) / _TtlSize);
-    //        new_perk.TarY = obj_PerkMGMT.PerkY;
-    //        var _TarX = obj_PerkMGMT.PerkX + (_Spacing * _TtlSize);
-    //        new_perk.TarX = _TarX;
-    //        new_perk.CountAsDispUp = true;
-    //    }
-    //}
-    //else
-    //{
-    //    new_perk.TarX = duped_id.x;
-    //    new_perk.TarY = duped_id.y;
-    //    new_perk.CountAsDispUp = false;
-    //}
-    
-    //new_perk.sprite_index = object_get_sprite(obj_PerkMGMT.PerkObj[perk_id]);
-    //new_perk.image_alpha = 1;
+    var _perk_giver = instance_create_depth(0, 0, obj_ItemMGMT.depth, agi("obj_nnfunctions_perk_giver"));
+			
+	with (_perk_giver) {
+		for (var i = 0; i < array_length(_perks_to_give); i++) {
+			//_perks_to_give
+			var _perk_id = get_perk_number_from_id(_perks_to_give[i]);
+						
+			array_push(queue, _perk_id);
+		}
+	}
 }
 
 function give_suspicious_key(instant = false, at_x = 950, at_y = 540) {
