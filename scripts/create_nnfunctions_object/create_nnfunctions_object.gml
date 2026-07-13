@@ -7,6 +7,8 @@ function create_nnfunctions_object(){
 		give_perk : give_perk,
 		give_suspicious_key : give_suspicious_key,
 		give_coins : give_coins,
+		get_item_id : get_item_id,
+		get_perk_id : get_perk_id,
 		forgery_get_item_id : forgery_get_item_id,
 		forgery_get_item_object : forgery_get_item_object,
 		forgery_get_perk_id : forgery_get_perk_id,
