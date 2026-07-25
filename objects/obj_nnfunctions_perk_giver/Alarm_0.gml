@@ -1,5 +1,4 @@
 if (array_length(queue) == 0) {
-	instance_destroy();
 	exit;
 }
 
