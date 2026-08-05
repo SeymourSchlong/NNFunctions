@@ -3,7 +3,7 @@
     "display_name" : "NNFunctions",
     "description" : "Library mod with useful functions for NNF mods. Also provides useful events.",
     "credits" : ["seymour"],
-    "version" : "0.2.1",
+    "version" : "0.3.0",
     "target_g3man_version" : 9,
     "depends" : [],
     "breaks" : [],

@@ -9,6 +9,8 @@ function create_nnfunctions_object(){
 		give_coins : give_coins,
 		get_item_id : get_item_id,
 		get_perk_id : get_perk_id,
+		get_leftmost_item : get_leftmost_item,
+		get_rightmost_item : get_rightmost_item,
 		forgery_get_item_id : forgery_get_item_id,
 		forgery_get_item_object : forgery_get_item_object,
 		forgery_get_perk_id : forgery_get_perk_id,

@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_nnfunctions_key_giver",
+  "%Name":"obj_ParUniqueItem",
   "eventList":[],
   "managed":true,
-  "name":"obj_nnfunctions_key_giver",
+  "name":"obj_ParUniqueItem",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"vanilla",
+    "path":"folders/Objects/vanilla.yy",
   },
   "parentObjectId":null,
   "persistent":false,
